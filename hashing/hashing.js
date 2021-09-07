@@ -31,14 +31,14 @@ Blockchain.blocks.push({
  * @returns {{ index: number, prevHash: string, data: string, timestamp: number, hash: string }} block object
  */
 export const createBlock = (data) => {
-  const blockIndex = Blockchain.blocks[Blockchain.blocks.length - 1].index + 1;
-  const prevHash = Blockchain.blocks[blockIndex - 1].hash;
+  const index = Blockchain.blocks[Blockchain.blocks.length - 1].index + 1;
+  const prevHash = Blockchain.blocks[index - 1].hash;
   const timestamp = Date.now();
 
-  const hash = blockHash({ index: blockIndex, prevHash, data, timestamp });
+  const hash = blockHash({ index: index, prevHash, data, timestamp });
 
   return {
-    index: blockIndex,
+    index,
     prevHash,
     data,
     timestamp,
