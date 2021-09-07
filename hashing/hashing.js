@@ -52,7 +52,7 @@ export const createBlock = (data) => {
     Blockchain.blocks.push(block);
   }
 
-  console.log(Blockchain.blocks);
+  // console.log(Blockchain.blocks);
 
   const isValid = verifyChain(Blockchain);
   console.log(`Blockchain is ${isValid ? "" : "NOT "}VALID`);
