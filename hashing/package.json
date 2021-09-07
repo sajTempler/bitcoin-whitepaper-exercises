@@ -1,0 +1,21 @@
+{
+  "name": "consensys-bootcamp",
+  "version": "1.0.0",
+  "description": "Start",
+  "main": "hashing.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sajTempler/consensys-training-2021.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sajTempler/consensys-training-2021/issues"
+  },
+  "homepage": "https://github.com/sajTempler/consensys-training-2021#readme"
+}
