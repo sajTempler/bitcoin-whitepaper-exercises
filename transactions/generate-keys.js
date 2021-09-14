@@ -1,22 +1,34 @@
-"use strict";
+import path from "path";
+import { writeFileSync, mkdirSync } from "fs";
+import { generateKey } from "openpgp";
 
-var path = require("path");
-var fs = require("fs");
-var openpgp = require("openpgp");
+const __dirname = path.dirname(new URL(import.meta.url).pathname);
+const KEYS_DIR = path.join(__dirname, "keys");
 
-const KEYS_DIR = path.join(__dirname,"keys");
-
-var options = {
-	userIds: [{ name: "Bitcoin Whitepaper", email: "bitcoin@whitepaper.tld" }],
-	numBits: 2048,
-	passphrase: "",
+const options = {
+  userIDs: { name: "Bitcoin Whitepaper", email: "bitcoin@whitepaper.tld" },
+  rsaBits: 4096,
+  type: "rsa",
+  passphrase: "",
 };
 
-openpgp.generateKey(options).then(function onGenerated(key) {
-	try { fs.mkdirSync(KEYS_DIR); } catch (err) {}
+generateKey(options)
+  .then(({privateKey, publicKey}) => {
+    try {
+      mkdirSync(KEYS_DIR);
+    } catch (err) {}
 
-	fs.writeFileSync(path.join(KEYS_DIR,"priv.pgp.key"),key.privateKeyArmored,"utf8");
-	fs.writeFileSync(path.join(KEYS_DIR,"pub.pgp.key"),key.publicKeyArmored,"utf8");
+    writeFileSync(
+      path.join(KEYS_DIR, "priv.pgp.key"),
+      privateKey,
+      "utf8"
+    );
+    writeFileSync(
+      path.join(KEYS_DIR, "pub.pgp.key"),
+      publicKey,
+      "utf8"
+    );
 
-	console.log("Keypair generated.");
-});
+    console.log("Keypair generated.");
+  })
+  .catch(console.error);
